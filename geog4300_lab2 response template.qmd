@@ -4,6 +4,7 @@ format:
   html:
     toc: true
 ---
+**Your name: William Burgett-Merkel**
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -34,6 +35,12 @@ Before you get started, you'll need to load the following packages: `tidyverse`,
 
 ```{r packages}
 # Load packages here.
+
+library(tidyverse)
+library(terra)
+library(sf)
+library(tmap)
+library(knitr)
 ```
 
 # Part 1: Mapping the distribution of trees
@@ -51,7 +58,9 @@ Your first task is to load these observations and convert them into a spatial po
 **Load the iNaturalist observations and convert them to an `sf` point dataset using the longitude and latitude fields. Map the observations using `tmap`, with the point colors based on the `gentype` field.**
 
 ```{r task1}
-# Code goes here.
+gatree_obs_inat <- read_csv("data/gatree_obs_inat.csv")
+
+
 ```
 
 ---
