@@ -58,9 +58,14 @@ Your first task is to load these observations and convert them into a spatial po
 **Load the iNaturalist observations and convert them to an `sf` point dataset using the longitude and latitude fields. Map the observations using `tmap`, with the point colors based on the `gentype` field.**
 
 ```{r task1}
-gatree_obs_inat <- read_csv("data/gatree_obs_inat.csv")
+gatree_obs_inat <- read_csv("data/gatree_obs_inat.csv") |> 
+  st_as_sf(coords = c("longitude", "latitude"),
+           crs = 4326,
+           remove = FALSE)
 
-
+tm_shape(gatree_obs_inat) +
+  tm_dots(size = 0.3, fill_alpha = 0.5,
+  fill = "gentype")
 ```
 
 ---
