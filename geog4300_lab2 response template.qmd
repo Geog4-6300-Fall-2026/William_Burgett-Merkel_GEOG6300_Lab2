@@ -84,7 +84,21 @@ You'll then use a spatial join to determine which county contains each tree obse
 **Load the Georgia county dataset and use a spatial join to assign each tree observation to a county. Create a table showing the number of observations of each species in each county.**
 
 ```{r task2}
-# Code goes here.
+ga_cty <- st_read("data/ACSCtyData_2022ACS_simplify.gpkg") %>% 
+  st_transform(4326) %>%
+  filter(st_name == "Georgia")
+
+gatree_county<-gatree_obs_inat %>%
+  st_join(ga_cty %>% st_transform(4326), #st_transform changes the projection to the listed EPSG number
+          join=st_within)
+
+gatree_county_count<-gatree_county %>%
+  count(cty_name, gentype)
+
+gatree_county_count_wide<-gatree_county_count %>%
+   st_drop_geometry() |> 
+  pivot_wider(names_from = gentype,
+              values_from = n)
 ```
 
 You should now have a dataset showing the number of observations of each species in each county.
