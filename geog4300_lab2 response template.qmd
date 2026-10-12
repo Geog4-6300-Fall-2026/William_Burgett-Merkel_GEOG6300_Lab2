@@ -89,7 +89,7 @@ ga_cty <- st_read("data/ACSCtyData_2022ACS_simplify.gpkg") %>%
   filter(st_name == "Georgia")
 
 gatree_county<-gatree_obs_inat %>%
-  st_join(ga_cty %>% st_transform(4326), #st_transform changes the projection to the listed EPSG number
+  st_join(ga_cty %>% st_transform(4326),
           join=st_within)
 
 gatree_county_count<-gatree_county %>%
@@ -118,7 +118,21 @@ Your next step is to calculate the **total number of tree observations** in each
 **Create a county-level dataset containing the number of observations of each species and the total number of tree observations.**
 
 ```{r task3}
-# Code goes here.
+gatree_county_count<-gatree_county %>%
+  count(cty_name, gentype)
+
+gatree_county_count_wide<-gatree_county_count %>%
+   st_drop_geometry() |> 
+  pivot_wider(names_from = gentype,
+              values_from = n)
+
+gatree_county_count_all<-gatree_county_count_wide %>%
+  group_by(cty_name) |> 
+  summarize(total_observations
+            =sum(c(Dogwood, `Live oak`, Pecan, Rhododendron), na.rm = TRUE))
+
+gatree_county_count_task3<-gatree_county_count_wide |> 
+  full_join(gatree_county_count_all, by = "cty_name")
 ```
 
 ## Calculating a location quotient
