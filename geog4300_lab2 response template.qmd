@@ -182,7 +182,11 @@ tm_shape(gatree_county_count_task5)+
 
 **Your response:**
 
-{Your response goes here.}
+The Live Oaks' geographic pattern shows that they prefer southern Georgia,
+particularly along coastal Georgia. There are slight hot spots in counties with
+larger populations like the Atlanta metro area, Athens-Clarke County, and Macon,
+Ga, but they generally tend to be in the south, close to the coast, where they
+are most concentrated. Alternatively, they are not generally concentrated in north Georgia, and are not usually located in more rural areas north of Atlanta.
 
 # Part 2: Trees and temperature in Georgia
 
