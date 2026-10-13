@@ -126,7 +126,7 @@ gatree_county_count_wide<-gatree_county_count %>%
   pivot_wider(names_from = gentype,
               values_from = n)
 
-gatree_county_count_all<-gatree_county_count_wide %>%
+gatree_county_count_all<-gatree_county_count_wide |>
   group_by(cty_name) |> 
   summarize(total_observations
             =sum(c(Dogwood, `Live oak`, Pecan, Rhododendron), na.rm = TRUE))
@@ -150,7 +150,16 @@ First, calculate the statewide proportion of observations that are live oak. The
 **Calculate the location quotient for live oak observations for every Georgia county. Add the resulting LQ as a new variable in your county dataset.**
 
 ```{r task4}
-# Code goes here.
+gatree_county_count_pct_subarea<-gatree_county_count_task3 |> 
+  mutate(pct_subarea = `Live oak`/total_observations)
+
+gatree_county_count_all_oak<- sum(gatree_county_count_task3$`Live oak`, na.rm = TRUE)
+gatree_county_count_total_observation_count<-sum(gatree_county_count_task3$total_observations)
+
+pct_area = gatree_county_count_all_oak/gatree_county_count_total_observation_count
+
+gatree_county_count_task4<-gatree_county_count_pct_subarea |> 
+  mutate(Location_Quotient=pct_subarea/pct_area)
 ```
 
 Now map your LQ values.
@@ -160,7 +169,15 @@ Now map your LQ values.
 **Create a map showing the location quotient for live oak observations. Describe the geographic pattern you see. Which parts of Georgia have relatively high concentrations of live oak observations? Which have relatively low concentrations?**
 
 ```{r task5_map}
-# Code goes here.
+ga_cty_geom<-ga_cty |>
+  select(cty_name, geom)
+
+gatree_county_count_task5<-ga_cty_geom |> 
+  left_join(st_drop_geometry(gatree_county_count_task4),
+            by = "cty_name")
+
+tm_shape(gatree_county_count_task5)+
+  tm_polygons("Location_Quotient")
 ```
 
 **Your response:**
