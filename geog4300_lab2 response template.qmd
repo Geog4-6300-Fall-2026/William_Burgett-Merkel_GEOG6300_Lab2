@@ -207,7 +207,11 @@ You should see this raster in the data folder of this lab repository. Load it us
 **Load the July 1, 2024 temperature raster and convert it from Kelvin to Celsius. Plot it when you are done.**
 
 ```{r task6}
-# Code goes here.
+temp_07012024<-rast("data/temp_july2022_2024/temperature_2m_2024-07-01.tif")
+
+temp_07012024_C<-temp_07012024 - 273.15
+
+plot(temp_07012024, main = "July 1st, 2024 Temperature (°C)")
 ```
 
 Now load **all of the temperature rasters for July 2022–2024**.
@@ -221,7 +225,17 @@ Use `nlyr()` to confirm how many raster layers you have loaded.
 **Load all temperature rasters for July dates in 2022–2024, convert them from Kelvin to Celsius, and calculate the mean temperature across all of the raster layers.**
 
 ```{r task7}
-# Code goes here.
+temp2022_to_2024_files<-list.files("data/temp_july2022_2024",
+                     pattern=".tif",
+                     full.names=T)
+
+temp_2022_to_2024<-rast(temp2022_to_2024_files)
+
+nlyr(temp_2022_to_2024)
+
+temp_2022_to_2024_C<-temp_2022_to_2024 - 273.15
+
+mean(temp_2022_to_2024_C)
 ```
 
 You now have a raster representing the mean July temperature across the study period.
