@@ -99,6 +99,7 @@ gatree_county_count_wide<-gatree_county_count %>%
    st_drop_geometry() |> 
   pivot_wider(names_from = gentype,
               values_from = n)
+kable(head(gatree_county_count_wide))
 ```
 
 You should now have a dataset showing the number of observations of each species in each county.
