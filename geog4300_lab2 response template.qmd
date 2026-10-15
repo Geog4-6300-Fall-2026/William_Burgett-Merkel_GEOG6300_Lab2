@@ -315,11 +315,6 @@ As a challenge, repeat the temperature analysis using the 1950–52 data. Calcul
 
 **Challenge:** _Which areas of Georgia show the largest changes in the temperatures associated with tree observations? Which trees are in areas with the greatest changes in temperature in this period?_
 
-Both the coast and NE Georgia saw almost 1°C increases from 1950-1952 to 
-2022-2024. This would most directly impact the Live Oak along the Southeastern
-Georgia coast, and the Rhododendron, which is predominantly in the Northern
-Georgia area.
-
 ```{r challenge}
 temp1950_to_1952_files<-list.files("data/temp_july1950_1952",
                      pattern=".tif",
@@ -347,6 +342,10 @@ ggplot(gatree_obs_inat)+
       color=Change))+
   scale_color_distiller(palette = "YlOrRd", direction=1)
 ```
+Both the coast and NE Georgia saw almost 1°C increases from 1950-1952 to 
+2022-2024. This would most directly impact the Live Oak along the Southeastern
+Georgia coast, and the Rhododendron, which is predominantly in the Northern
+Georgia area.
 
 # Final submission
 
@@ -376,7 +375,11 @@ was curious (even though it wasn't necessary to the lab). For the challenge
 question, I used AI to help me figure out which tool was best to plot the data
 (I wasn't sure if using plot() or ggplot() would be best), as well as choosing
 and using the best color scheme. Lastly, I used AI to fix simple errors like
-forgetting |>, or "" and +, which I forget pretty frequently.
+forgetting |>, or "" and +, which I forget pretty frequently. These tools helped
+me complete my lab, as I was stuck several times on different tasks and these 
+tools allowed me to focus learn the formatting and process of coding for this
+lab and not to get bogged down trying to find the right format or find the
+missing + or |>.
 
 ## Lab reflection
 
