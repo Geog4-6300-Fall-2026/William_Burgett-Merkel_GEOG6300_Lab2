@@ -250,9 +250,11 @@ Next, use `terra::extract()` to obtain the temperature value at the location of 
 **Extract the mean July temperature for each tree observation and add the temperature value to the tree dataset. Display the first several observations using `kable()`.**
 
 ```{r task8}
-extracted_tree_temp_data<-terra::extract(x = mean(temp_2022_to_2024_C), y = gatree_obs_inat)
+extracted_tree_temp_data_2022_to_2024<-terra::extract(
+  x = mean(temp_2022_to_2024_C), 
+  y = gatree_obs_inat)
 
-gatree_obs_inat$Temperature<-extracted_tree_temp_data$mean
+gatree_obs_inat$Temperature_2022_to_2024_C<-extracted_tree_temp_data_2022_to_2024$mean
 
 kable(head(gatree_obs_inat))
 ```
@@ -273,16 +275,16 @@ The mean longitude and latitude provide a simple measure of the **mean center** 
 **Calculate the mean and standard deviation of temperature for each species, along with the mean longitude and latitude of their observations. Display the results using `kable()`.**
 
 ```{r task9}
-Tree_Summary_Statistics<-gatree_obs_inat |> 
+Tree_Summary_Statistics_2022_to_2024<-gatree_obs_inat |> 
 group_by(gentype) |> 
   summarize(
-    mean_temp = mean(Temperature, na.rm = TRUE),
-    standard_deviation = sd(Temperature, na.rm = TRUE),
+    mean_temp = mean(Temperature_2022_to_2024_C, na.rm = TRUE),
+    standard_deviation = sd(Temperature_2022_to_2024_C, na.rm = TRUE),
     mean_longitude = mean(longitude, na.rm = TRUE),
     mean_latitude = mean(latitude, na.rm = TRUE)
     )
 
-kable(Tree_Summary_Statistics)
+kable(Tree_Summary_Statistics_2022_to_2024)
 
 ```
 
@@ -313,8 +315,37 @@ As a challenge, repeat the temperature analysis using the 1950–52 data. Calcul
 
 **Challenge:** _Which areas of Georgia show the largest changes in the temperatures associated with tree observations? Which trees are in areas with the greatest changes in temperature in this period?_
 
+Both the coast and NE Georgia saw almost 1°C increases from 1950-1952 to 
+2022-2024. This would most directly impact the Live Oak along the Southeastern
+Georgia coast, and the Rhododendron, which is predominantly in the Northern
+Georgia area.
+
 ```{r challenge}
-# Start your code here.
+temp1950_to_1952_files<-list.files("data/temp_july1950_1952",
+                     pattern=".tif",
+                     full.names=T)
+
+temp_1950_to_1952<-rast(temp1950_to_1952_files)
+
+nlyr(temp_1950_to_1952)
+
+temp_1950_to_1952_C<-temp_1950_to_1952 - 273.15
+
+mean(temp_1950_to_1952_C)
+
+extracted_tree_temp_data_1950_to_1952_C<-terra::extract(
+  x = mean(temp_1950_to_1952_C), 
+  y = gatree_obs_inat)
+
+gatree_obs_inat$Temperature_1950_to_1952_C<-extracted_tree_temp_data_1950_to_1952_C$mean
+
+gatree_obs_inat$Change<-gatree_obs_inat$Temperature_2022_to_2024_C - gatree_obs_inat$Temperature_1950_to_1952_C
+
+ggplot(gatree_obs_inat)+
+  geom_point(aes(x=longitude,
+      y=latitude,
+      color=Change))+
+  scale_color_distiller(palette = "YlOrRd", direction=1)
 ```
 
 # Final submission
@@ -341,9 +372,11 @@ helped me by telling me I was not letting it filter by the gentype column since
 I was used the $ to select a column, which would just use the entire column's
 data instead of just the data in the column that belongs to the specific tree
 species. I also asked AI how to add a title to the figure in task 6, because I
-was curious (even though it wasn't necessary to the lab). Lastly, I used AI to
-fix simple errors like forgetting |>, or "" and +, which I forget pretty
-frequently.
+was curious (even though it wasn't necessary to the lab). For the challenge
+question, I used AI to help me figure out which tool was best to plot the data
+(I wasn't sure if using plot() or ggplot() would be best), as well as choosing
+and using the best color scheme. Lastly, I used AI to fix simple errors like
+forgetting |>, or "" and +, which I forget pretty frequently.
 
 ## Lab reflection
 
