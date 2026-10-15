@@ -328,20 +328,22 @@ how to apply different parts of the data to get the results I wanted. For
 example, in task 4, I used AI to explain what goes into the Location Quotient
 equation (LQ=pct_subarea/pctarea). AI helped me understand what kind of data
 should go in the subarea part of the equation, so I could do the calculation 
-correctly. Also in task 4, I needed help selecting the "Live oak" data since it
-was 2 words, so AI explained why "" didn't work, and why I needed to use ``
-instead. I also used AI to help with task 8 because I was confused about the 
-format for the terra::extract() function. I had never seen it before so I used
-AI to see how to format the function to apply it to my own code. I also used it
-if I got any errors I wasn't sure how to fix. For example, in task 9 I was
-getting the same temperature, standard deviation, latitude, and longitude value
-for all 4 species, and AI helped me by telling me I was not letting it filter by
-the gentype column since I was used the $ to select a column, which would just 
-use the entire column's data instead of just the data in the column that belongs
-to the specific tree species. I also asked AI how to add a title to the figure 
-in task 6, because I was curious (even though it wasn't necessary to the lab).
-Lastly, I used AI to fix simple errors like forgetting |>, or "" and +, which I
-forget pretty frequently.
+correctly. I also had a classmate explain to me how to do the Location Quotient
+in R, but primarily used AI for guidance. Also in task 4, I needed help
+selecting the "Live oak" data since it was 2 words, so AI explained why ""
+didn't work, and why I needed to use `` instead. I also used AI to help with
+task 8 because I was confused about the format for the terra::extract()
+function. I had never seen it before so I used AI to see how to format the
+function to apply it to my own code. I also used it if I got any errors I wasn't
+sure how to fix. For example, in task 9 I was getting the same temperature,
+standard deviation, latitude, and longitude value for all 4 species, and AI
+helped me by telling me I was not letting it filter by the gentype column since
+I was used the $ to select a column, which would just use the entire column's
+data instead of just the data in the column that belongs to the specific tree
+species. I also asked AI how to add a title to the figure in task 6, because I
+was curious (even though it wasn't necessary to the lab). Lastly, I used AI to
+fix simple errors like forgetting |>, or "" and +, which I forget pretty
+frequently.
 
 ## Lab reflection
 
